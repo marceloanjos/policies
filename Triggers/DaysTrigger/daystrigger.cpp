@@ -63,18 +63,34 @@ bool DaysTrigger::triggered(QMap<QString,QVariant> params)
 {
     try
     {
-        if(!params.keys().contains("dateupdated")) return false;
-        if(!params.keys().contains("days")) throw QString("Days not found in params!");
 
-        QDateTime lastupdate = params.value("dateupdated").toDateTime();
-        QDateTime current = QDateTime::currentDateTime();
+        m_errorString.clear();
+
+        qDebug() << " - checking trigger: " + name();
+
+        foreach(QString key, params.keys())
+        {
+            qDebug() << " - key: " + key + " = " + params.value(key).toString();
+        }
 
         bool bOK;
         int days = params.value("days").toInt(&bOK);
-
         if(!bOK) throw QString("Days not a valid number!");
 
-        if(lastupdate.daysTo(current) >= days) return true;
+        if(!params.keys().contains("dateupdated")) throw QString("DateUpdated not found in params!");
+        if(!params.keys().contains("days")) throw QString("Days not found in params!");
+
+        QDateTime lastupdate = QDateTime::fromString(params.value("dateupdated").toString(),"MM-dd-yyyy hh:mm:ss");
+        QDateTime current = QDateTime::currentDateTime();
+        qint64 daysSince = lastupdate.daysTo(current);
+
+
+        qDebug() << " - lastupdate: " << lastupdate.toString();
+        qDebug() << " - current: " << current.toString();
+        qDebug() << " - Days: " << days;
+        qDebug() << " - DaysSince: " << daysSince;
+
+        if(daysSince >= days) return true;
 
 
         return false;
