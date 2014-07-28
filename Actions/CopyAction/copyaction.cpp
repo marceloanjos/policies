@@ -63,6 +63,14 @@ bool CopyAction::performAction(QMap<QString, QVariant> params)
 {
     try
     {
+
+        qDebug() << " - checking action: " + name();
+
+        foreach(QString key, params.keys())
+        {
+            qDebug() << " - key: " + key + " = " + params.value(key).toString();
+        }
+
         //Make sure the params exist
         if(!params.keys().contains("source")) throw QString("Source paramater missing!");
         if(!params.keys().contains("destination")) throw QString("Destination paramater missing!");

@@ -63,6 +63,13 @@ bool CompressAction::performAction(QMap<QString, QVariant> params)
 {
     try
     {
+        qDebug() << " - checking action: " + name();
+
+        foreach(QString key, params.keys())
+        {
+            qDebug() << " - key: " + key + " = " + params.value(key).toString();
+        }
+
         if(!params.keys().contains("source")) throw QString("Source paramater missing!");
         if(!params.keys().contains("zip")) throw QString("Zip paramater missing!");
 
