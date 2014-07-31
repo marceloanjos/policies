@@ -65,6 +65,13 @@ bool DateTrigger::triggered(QMap<QString,QVariant> params)
     {
         m_errorString.clear();
 
+        qDebug() << " - checking trigger: " + name();
+
+        foreach(QString key, params.keys())
+        {
+            qDebug() << " - key: " + key + " = " + params.value(key).toString();
+        }
+
         //Make sure we have the required parameters
         if(!params.keys().contains("date")) return false;
 

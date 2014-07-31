@@ -153,7 +153,8 @@ void CommandAction::ShellReadyRead()
         //get each line of the buffer
         foreach(QString cLine, cList)
         {
-           qDebug() << "\t" << cLine;
+            if(cLine.trimmed() == "") continue;
+            qDebug() << "\t" << cLine;
         }
     }
     catch(QString err)

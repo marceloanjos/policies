@@ -63,19 +63,25 @@ bool DateTimeTrigger::triggered(QMap<QString,QVariant> params)
 {
     try
     {
-        //Make sure we have the required parameters
+        m_errorString.clear();
+        qDebug() << " - checking trigger: " + name();
+
+        foreach(QString key, params.keys())
+        {
+            qDebug() << " - key: " + key + " = " + params.value(key).toString();
+        }
+
         if(!params.keys().contains("datetime")) return false;
 
         //Get the parameter
         QDateTime date = params.value("datetime").toDateTime();
         QDateTime current = QDateTime::currentDateTime();
 
-        //qDebug() << "params: " <<  params.value("datetime").toString();
-        //qDebug() << "Date: " <<  date;
-        //qDebug() << "Curent: " <<  current;
+        qDebug() << " - Date: " <<  date.toString();
+        qDebug() << " - Curent: " <<  current.toString();
 
         //See if it is the same date and hour / minute
-         if(current.date() == date.date() && current.time().hour() == date.time().hour() && current.time().minute() == date.time().minute())return true;
+        if(date <= current) return true;
 
         //Otherwise return false
         return false;
