@@ -5,6 +5,7 @@
 #include <QtPlugin>
 #include <QString>
 #include <QDebug>
+#include <QDateTime>
 
 #include "iTrigger.h"
 

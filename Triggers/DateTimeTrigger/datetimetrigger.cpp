@@ -64,11 +64,10 @@ bool DateTimeTrigger::triggered(QMap<QString,QVariant> params)
     try
     {
         m_errorString.clear();
-        qDebug() << " - checking trigger: " + name();
-
+        qDebug() << " - checking trigger: " << name();
         foreach(QString key, params.keys())
         {
-            qDebug() << " - key: " + key + " = " + params.value(key).toString();
+            qDebug() << " - key: " << key << " = " << params.value(key).toString();
         }
 
         if(!params.keys().contains("datetime")) return false;

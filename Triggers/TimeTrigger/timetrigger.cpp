@@ -63,11 +63,10 @@ bool TimeTrigger::triggered(QMap<QString,QVariant> params)
 {
     try
     {
-        qDebug() << " - checking trigger: " + name();
-
+        qDebug() << " - checking trigger: " << name();
         foreach(QString key, params.keys())
         {
-            qDebug() << " - key: " + key + " = " + params.value(key).toString();
+            qDebug() << " - key: " << key << " = " << params.value(key).toString();
         }
 
         //Make sure we have the required parameters

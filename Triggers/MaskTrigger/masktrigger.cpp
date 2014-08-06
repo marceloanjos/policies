@@ -63,12 +63,23 @@ bool MaskTrigger::triggered(QMap<QString,QVariant> params)
 {
     try
     {
-        qDebug() << " - checking trigger: " + name();
-
+        qDebug() << " - checking trigger: " << name();
         foreach(QString key, params.keys())
         {
-            qDebug() << " - key: " + key + " = " + params.value(key).toString();
+            qDebug() << " - key: " << key << " = " << params.value(key).toString();
         }
+
+        //See if this has already ran
+        if(params.keys().contains("triggerdate"))
+        {
+            QDateTime lastrun = params.value("triggerdate").toDateTime();
+            if(lastrun.daysTo(QDateTime::currentDateTime()) == 0)
+            {
+                qDebug() << name() << " skipping, has already run";
+                return false;
+            }
+        }
+
 
         if(!params.keys().contains("ipaddress")) throw QString("IPaddress not in params.");
         if(!params.keys().contains("mask")) throw QString("Mask not in params.");

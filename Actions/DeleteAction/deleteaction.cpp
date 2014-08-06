@@ -63,6 +63,13 @@ bool DeletAction::performAction(QMap<QString, QVariant> params)
 {
     try
     {
+        qDebug() << " - checking action: " << name();
+        foreach(QString key, params.keys())
+        {
+            qDebug() << " - key: " << key << " = " << params.value(key).toString();
+        }
+
+
         //Make sure the params exist
         if(!params.keys().contains("delete")) throw QString("Source paramater missing!");
 

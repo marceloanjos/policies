@@ -64,10 +64,10 @@ bool TriggerTemplate::triggered(QMap<QString,QVariant> params)
     try
     {
         //TO DO - Determine if the trigger has been met
-
+        qDebug() << " - checking trigger: " << name();
         foreach(QString key, params.keys())
         {
-            qDebug() << key << ": " << params.value(key);
+            qDebug() << " - key: " << key << " = " << params.value(key).toString();
         }
 
         return true;

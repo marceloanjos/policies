@@ -86,12 +86,12 @@ bool CommandAction::performAction(QMap<QString, QVariant> params)
     try
     {
 
-        qDebug() << " - checking action: " + name();
-
+        qDebug() << " - checking action: " << name();
         foreach(QString key, params.keys())
         {
-            qDebug() << " - key: " + key + " = " + params.value(key).toString();
+            qDebug() << " - key: " << key << " = " << params.value(key).toString();
         }
+
 
         if(!params.keys().contains("command")) throw QString("Command paramater missing!");
 

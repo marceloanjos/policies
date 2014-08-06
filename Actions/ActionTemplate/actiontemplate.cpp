@@ -65,11 +65,10 @@ bool ActionTemplate::performAction(QMap<QString, QVariant> params)
     {
         //TO DO - Perform the action and return the result
 
-        qDebug() << " - checking action: " + name();
-
+        qDebug() << " - checking action: " << name();
         foreach(QString key, params.keys())
         {
-            qDebug() << " - key: " + key + " = " + params.value(key).toString();
+            qDebug() << " - key: " << key << " = " << params.value(key).toString();
         }
 
         return true;

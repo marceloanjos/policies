@@ -65,15 +65,25 @@ bool DateTrigger::triggered(QMap<QString,QVariant> params)
     {
         m_errorString.clear();
 
-        qDebug() << " - checking trigger: " + name();
-
+        qDebug() << " - checking trigger: " << name();
         foreach(QString key, params.keys())
         {
-            qDebug() << " - key: " + key + " = " + params.value(key).toString();
+            qDebug() << " - key: " << key << " = " << params.value(key).toString();
         }
 
         //Make sure we have the required parameters
         if(!params.keys().contains("date")) return false;
+
+        //See if this has already ran
+        if(params.keys().contains("triggerdate"))
+        {
+            QDateTime lastrun = params.value("triggerdate").toDateTime();
+            if(lastrun.daysTo(QDateTime::currentDateTime()) == 0)
+            {
+                qDebug() << name() << " skipping, has already run";
+                return false;
+            }
+        }
 
         //Get the parameter
         QDate date = params.value("date").toDate();
